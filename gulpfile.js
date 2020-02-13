@@ -14,9 +14,11 @@ var watched = watchify(browserify({
 	entries: './src/calc.js',
 	cache: {},
 	packageCache: {}
-})).on('error', (err) => {
+}).on('error', (err) => {
 	console.log(err.message);
 	this.emit('end');
+})).transform('babelify', {
+	presets: ['es2015']
 });
 
 // Bundles all of the Javascript resources
