@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
 var fancy_log = require('fancy-log');
+var qunit = require('gulp-qunit');
 
 // The watch task
 var watched = watchify(browserify({
@@ -32,6 +33,12 @@ function bundle() {
 			.pipe(sourcemaps.write('./'))
 			.pipe(gulp.dest('scripts/'));
 }
+
+// The testing task
+gulp.task('test', function() {
+	return gulp.src('./test/engine.html')
+		.pipe(qunit());
+});
 
 // Watches for changes to watched files
 gulp.task('watch', () => {
