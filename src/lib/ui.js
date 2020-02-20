@@ -4,6 +4,9 @@ export function UI() {
 	// The current expression string
 	this.expressionStr = "";
 
+	// Tracks if the display is set to a result
+	this.displayingResult = false;
+
 	// Initializes the UI event listeners
 	this.initListeners = function() {
 		// Load the buttons
@@ -90,6 +93,7 @@ export function UI() {
 		var expr = calc.toPostfix(this.expressionStr);
 		var res = calc.calc(expr);
 		this.expressionStr = res;
+		this.displayingResult = true;
 		this.updateDisplay();
 	}
 
@@ -103,11 +107,20 @@ export function UI() {
 				if (this.expressionStr != null)
 					this.expressionStr = this.expressionStr.substring(0, this.expressionStr.length - 1);
 				break;
+			case "+":
+			case "*":
+			case "/":
+			case "-":
+				this.expressionStr += op;
+				break;
 			default:
+				if (this.displayingResult)
+					this.expressionStr = "";
 				this.expressionStr += op;
 				break;
 		}
 
+		this.displayingResult = false;
 		this.updateDisplay();
 	}
 
