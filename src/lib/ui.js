@@ -100,7 +100,8 @@ export function UI() {
 				this.expressionStr = "";
 				break;
 			case "DEL": 
-				this.expressionStr = this.expressionStr.substring(0, this.expressionStr.length - 1);
+				if (this.expressionStr != null)
+					this.expressionStr = this.expressionStr.substring(0, this.expressionStr.length - 1);
 				break;
 			default:
 				this.expressionStr += op;
