@@ -127,7 +127,10 @@ export function Calculator() {
 		if (stack.length > 1) {
 			return "Syntax Error";
 		} else {
-			return stack.pop();
+			var res = stack.pop();
+			if (res == "NaN" || isNaN(res))
+				res = "Syntax Error!";
+			return res;
 		}
 	}
 
