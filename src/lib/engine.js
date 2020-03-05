@@ -18,10 +18,6 @@ Array.prototype.clean = function() {
 	return this;
 }
 
-var isAlpha = function(ch){
-  return /^[A-Z]$/i.test(ch);
-}
-
 export function Calculator() {
 
 	// Converts an infix expression to postfix
@@ -83,6 +79,8 @@ export function Calculator() {
 				stack.push("cos(");
 			} else if (token == "tan") {
 				stack.push("tan(");
+			} else if (token == "log") {
+				stack.push("log(");
 			}
 
 			if (token.isNumeric()) {
@@ -126,6 +124,10 @@ export function Calculator() {
 			return (num * factorialize(num - 1));
 	}
 
+	function logBaseN(num, base) {
+		return Math.log(num) / Math.log(base);
+	}
+
 	// Given an expression in postifx, solve it
 	this.calc = function(postfix) {
 		var stack = []; // The result stack
@@ -141,6 +143,8 @@ export function Calculator() {
 				var a = stack.pop();
 				var b = stack.pop();
 
+				console.log(postfix);
+				console.log(postfix[i]);
 				console.log("A: " + a + ", B: " + b);
 
 				if (postfix[i] === "+") {
@@ -158,11 +162,13 @@ export function Calculator() {
 				} else if (postfix[i] == "sqrt(") {
 					stack.push(Math.sqrt(a));
 				} else if (postfix[i] == "sin(") {
-					stack.push(Math.sin(a));
+					stack.push(Math.sin(a * Math.PI / 180.0));
 				} else if (postfix[i] == "cos(") {
-					stack.push(Math.cos(a));
+					stack.push(Math.cos(a * Math.PI / 180.0));
 				} else if (postfix[i] == "tan(") {
-					stack.push(Math.tan(a));
+					stack.push(Math.tan(a * Math.PI / 180.0));
+				} else if (postfix[i] == "log(") {
+					stack.push(logBaseN(a, 10));
 				}
 			}
 		}
