@@ -25,6 +25,18 @@ export function UI() {
 		var btn_dec = document.querySelector("#btn_dec");
 		var btn_zero = document.querySelector("#btn_zero");
 		var btn_eq = document.querySelector("#btn_equ");
+		var btn_sin = document.querySelector("#btn_sin");
+        var btn_cos = document.querySelector("#btn_cos");
+        var btn_tan = document.querySelector("#btn_tan");
+        var btn_log = document.querySelector("#btn_log");
+        var btn_pi = document.querySelector("#btn_pi");
+        var btn_sqrt = document.querySelector("#btn_sqrt");
+        var btn_factorial = document.querySelector("#btn_factorial");
+        var btn_lparen = document.querySelector("#btn_lparen");
+        var btn_rparen = document.querySelector("#btn_rparen");
+        var btn_neg = document.querySelector("#btn_neg");
+        var btn_squared = document.querySelector("#btn_squared");
+        var btn_power = document.querySelector("#btn_power");
 
 		// Add the listeners
 		btn_ac.addEventListener("click", () => {
@@ -79,9 +91,46 @@ export function UI() {
 			this.updateExpression("0");
 		});
 
+		// Click handlers for mathematical functions
 		btn_eq.addEventListener("click", () => {
 			this.solve();
 		});
+		btn_sin.addEventListener("click", () => {
+            this.updateExpression("sin(");
+        });
+        btn_cos.addEventListener("click", () => {
+            this.updateExpression("cos(");
+        });
+        btn_tan.addEventListener("click", () => {
+            this.updateExpression("tan(");
+        });
+        btn_pi.addEventListener("click", () => {
+            this.updateExpression("pi");
+        });
+        btn_sqrt.addEventListener("click", () => {
+            this.updateExpression("sqrt(");
+        });
+        btn_log.addEventListener("click", () => {
+            this.updateExpression("log(");
+        });
+        btn_factorial.addEventListener("click", () => {
+        	this.updateExpression("!");
+        });
+        btn_lparen.addEventListener("click", () => {
+        	this.updateExpression("(");
+        });
+        btn_rparen.addEventListener("click", () => {
+        	this.updateExpression(")");
+        });
+        btn_neg.addEventListener("click", () => {
+        	this.updateSign();
+        });
+        btn_squared.addEventListener("click", () => {
+        	this.updateExpression("^2");
+        });
+        btn_power.addEventListener("click", () => {
+        	this.updateExpression("^");
+        });
 	}
 
 	// Uses the calculator engine to solve an expression
@@ -90,6 +139,18 @@ export function UI() {
 		var expr = calc.toPostfix(this.expressionStr);
 		var res = calc.calc(expr);
 		this.expressionStr = res;
+		this.updateDisplay();
+	}
+
+	this.updateSign = function() {
+		if (this.expressionStr.length <= 0)
+			this.expressionStr = '';
+
+		if (this.expressionStr[this.expressionStr.length] == '-')
+			this.expressionStr[this.expressionStr.length] = '';
+		else 
+			this.expressionStr += '-';
+
 		this.updateDisplay();
 	}
 
