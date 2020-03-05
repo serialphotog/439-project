@@ -33,6 +33,11 @@ export function Calculator() {
 				associativity: "right"
 			},
 
+			"!": {
+				precedence: 4,
+				associativity: "right"
+			},
+
 			"/": {
 				precedence: 3,
 				associativity: "left"
@@ -54,10 +59,13 @@ export function Calculator() {
 			}
 		}
 
+		// Find and replace constants
+		expression = expression.replace(/&pi;/, Math.PI);
+
 		// Removes one or more occurences of whitespace globally
 		expression = expression.replace(/\s+/g, "");
 		// Searches for operators and splits the expression on them
-		expression = expression.split(/([\+\-\*\/\^\(\)])/).clean();
+		expression = expression.split(/([\+\-\*\/\^\(\)\!])/).clean();
 
 		// Parse the expression
 		for (var i=0; i < expression.length; i++) {
@@ -65,12 +73,12 @@ export function Calculator() {
 
 			if (token.isNumeric()) {
 				out += token + " ";
-			} else if ("^*/+-".indexOf(token) !== -1) {
+			} else if ("^*/+-!".indexOf(token) !== -1) {
 				// This is an operator token
 				var a = token;
 				var b = stack[stack.length - 1];
 
-				while ("^*/+-".indexOf(b) !== -1 && ((operators[a].associativity == "left" && operators[a].precedence <= operators[b].precedence) || 
+				while ("^*/+-!".indexOf(b) !== -1 && ((operators[a].associativity == "left" && operators[a].precedence <= operators[b].precedence) || 
 					operators[a].associativity == "right" && operators[b].precedence < operators[b].precedence)) {
 					out += stack.pop() + " ";
 					b = stack[stack.length - 1];
@@ -93,6 +101,15 @@ export function Calculator() {
 		}
 
 		return out;
+	}
+
+	function factorialize(num) {
+		if (num < 0)
+			return -1;
+		else if (num == 0)
+			return 1;
+		else 
+			return (num * factorialize(num - 1));
 	}
 
 	// Given an expression in postifx, solve it
@@ -120,6 +137,8 @@ export function Calculator() {
 					stack.push(parseFloat(b) / parseFloat(a));
 				} else if (postfix[i] === "^") {
 					stack.push(Math.pow(parseFloat(b), parseFloat(a)));
+				} else if (postfix[i] == "!") {
+					stack.push(factorialize(a));
 				}
 			}
 		}
