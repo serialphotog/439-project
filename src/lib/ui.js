@@ -105,7 +105,7 @@ export function UI() {
             this.updateExpression("tan(");
         });
         btn_pi.addEventListener("click", () => {
-            this.updateExpression("pi");
+            this.updateExpression("&pi;");
         });
         btn_sqrt.addEventListener("click", () => {
             this.updateExpression("sqrt(");

@@ -59,6 +59,9 @@ export function Calculator() {
 			}
 		}
 
+		// Find and replace constants
+		expression = expression.replace(/&pi;/, Math.PI);
+
 		// Removes one or more occurences of whitespace globally
 		expression = expression.replace(/\s+/g, "");
 		// Searches for operators and splits the expression on them
