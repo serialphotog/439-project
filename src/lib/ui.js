@@ -37,9 +37,9 @@ export function UI() {
         var btn_factorial = document.querySelector("#btn_factorial");
         var btn_lparen = document.querySelector("#btn_lparen");
         var btn_rparen = document.querySelector("#btn_rparen");
-        var btn_neg = document.querySelector("#btn_neg");
         var btn_squared = document.querySelector("#btn_squared");
         var btn_power = document.querySelector("#btn_power");
+        var btn_cube = document.querySelector("#btn_cube");
 
 		// Add the listeners
 		btn_ac.addEventListener("click", () => {
@@ -125,12 +125,12 @@ export function UI() {
         btn_rparen.addEventListener("click", () => {
         	this.updateExpression(")");
         });
-        btn_neg.addEventListener("click", () => {
-        	this.updateSign();
-        });
         btn_squared.addEventListener("click", () => {
         	this.updateExpression("^2");
         });
+        btn_cube.addEventListener("click", () => {
+        	this.updateExpression("^3");
+        })
         btn_power.addEventListener("click", () => {
         	this.updateExpression("^");
         });
@@ -143,18 +143,6 @@ export function UI() {
 		var res = calc.calc(expr);
 		this.expressionStr = res;
 		this.displayingResult = true;
-		this.updateDisplay();
-	}
-
-	this.updateSign = function() {
-		if (this.expressionStr.length <= 0)
-			this.expressionStr = '';
-
-		if (this.expressionStr[this.expressionStr.length] == '-')
-			this.expressionStr[this.expressionStr.length] = '';
-		else 
-			this.expressionStr += '-';
-
 		this.updateDisplay();
 	}
 
