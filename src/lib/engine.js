@@ -143,10 +143,6 @@ export function Calculator() {
 				var a = stack.pop();
 				var b = stack.pop();
 
-				console.log(postfix);
-				console.log(postfix[i]);
-				console.log("A: " + a + ", B: " + b);
-
 				if (postfix[i] === "+") {
 					stack.push(parseFloat(a) + parseFloat(b));
 				} else if (postfix[i] === "-") {

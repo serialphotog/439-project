@@ -179,4 +179,84 @@ export function UI() {
 		display.innerHTML = this.expressionStr;
 	}
 
+	this.handleKeyPress = function(e) {
+		switch (e.code) {
+			case "Numpad0":
+			case "Digit0":
+				if (e.shiftKey)
+					this.updateExpression(")");
+				else
+					this.updateExpression(0);
+				break;
+			case "Numpad1":
+			case "Digit1":
+				this.updateExpression(1);
+				break;
+			case "Numpad2":
+			case "Digit2":
+				this.updateExpression(2);
+				break;
+			case "Numpad3":
+			case "Digit3":
+				this.updateExpression(3);
+				break;
+			case "Numpad4":
+			case "Digit4":
+				this.updateExpression(4);
+				break;
+			case "Numpad5":
+			case "Digit5":
+				this.updateExpression(5);
+				break;
+			case "Numpad6":
+			case "Digit6":
+				this.updateExpression(6);
+				break;
+			case "Numpad7":
+			case "Digit7":
+				this.updateExpression(7);
+				break;
+			case "Numpad8":
+			case "Digit8":
+				this.updateExpression(8);
+				break;
+			case "Numpad9":
+			case "Digit9":
+				if (e.shiftKey)
+					this.updateExpression("(");
+				else
+					this.updateExpression(9);
+				break;
+			case "Escape":
+				this.updateExpression("AC");
+				break;
+			case "Backspace":
+				this.updateExpression("DEL");
+				break;
+			case "Slash":
+			case "NumpadDivide":
+				this.updateExpression("/");
+				break;
+			case "Minus":
+			case "NumpadSubtract":
+				this.updateExpression("-");
+				break;
+			case "NumpadAdd":
+				this.updateExpression("+");
+				break;
+			case "NumpadMultiply":
+				this.updateExpression("*");
+				break;
+			case "NumpadEnter":
+				this.solve();
+				break;
+			case "Equal":
+				if (e.shiftKey)
+					this.updateExpression("+");
+				else
+					this.solve();
+				break;
+		}	
+	}
+
 }

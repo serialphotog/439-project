@@ -7,4 +7,8 @@ window.addEventListener("load", function init(event) {
 	// Initialize the UI
 	var Interface = new UI();
 	Interface.initListeners();
+
+	document.addEventListener("keyup", (e) => {
+		Interface.handleKeyPress(e);
+	});
 }, false);
