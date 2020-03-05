@@ -18,6 +18,10 @@ Array.prototype.clean = function() {
 	return this;
 }
 
+var isAlpha = function(ch){
+  return /^[A-Z]$/i.test(ch);
+}
+
 export function Calculator() {
 
 	// Converts an infix expression to postfix
@@ -70,6 +74,16 @@ export function Calculator() {
 		// Parse the expression
 		for (var i=0; i < expression.length; i++) {
 			var token = expression[i];
+
+			if (token == "sqrt") {
+				stack.push("sqrt(");
+			} else if (token == "sin") {
+				stack.push("sin(");
+			} else if (token == "cos") {
+				stack.push("cos(");
+			} else if (token == "tan") {
+				stack.push("tan(");
+			}
 
 			if (token.isNumeric()) {
 				out += token + " ";
@@ -127,6 +141,8 @@ export function Calculator() {
 				var a = stack.pop();
 				var b = stack.pop();
 
+				console.log("A: " + a + ", B: " + b);
+
 				if (postfix[i] === "+") {
 					stack.push(parseFloat(a) + parseFloat(b));
 				} else if (postfix[i] === "-") {
@@ -139,6 +155,14 @@ export function Calculator() {
 					stack.push(Math.pow(parseFloat(b), parseFloat(a)));
 				} else if (postfix[i] == "!") {
 					stack.push(factorialize(a));
+				} else if (postfix[i] == "sqrt(") {
+					stack.push(Math.sqrt(a));
+				} else if (postfix[i] == "sin(") {
+					stack.push(Math.sin(a));
+				} else if (postfix[i] == "cos(") {
+					stack.push(Math.cos(a));
+				} else if (postfix[i] == "tan(") {
+					stack.push(Math.tan(a));
 				}
 			}
 		}
