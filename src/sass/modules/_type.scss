@@ -9,6 +9,11 @@ $font_size_calculator_button: 2rem;
     font-weight: $font_weight_global;
 }
 
+sup {
+    font-size: medium; 
+    vertical-align:super;
+}
+
 .output {
     font-size: $font_size_calculator_output;
     word-wrap:break-word;
