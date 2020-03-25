@@ -160,6 +160,9 @@ export function UI() {
 			case "*":
 			case "/":
 			case "-":
+			case "^2":
+			case "^3":
+			case "^":
 				this.expressionStr += op;
 				break;
 			default:
