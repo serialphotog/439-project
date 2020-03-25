@@ -1,0 +1,29 @@
+@import 'modules/respond';
+
+.calculator-grid {
+    -ms-flex-pack:center;
+    -ms-flex-line-pack:center;
+    display: -ms-grid;
+    -ms-grid-columns: 100px 100px 100px 100px 100px;
+    -ms-grid-rows: 75px 75px 75px 75px 75px;
+
+    @include max_width (540px) {
+        -ms-grid-columns: 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr;
+    }
+
+    @include max_width (330px) {
+        -ms-grid-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    }
+
+    @include max_width (300px) {
+        -ms-grid-columns: 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr;
+    }
+}
+
+.span-two{
+    -ms-grid-column-span: 2;
+}
+
+.span-three {
+    -ms-grid-column-span: 3;
+}

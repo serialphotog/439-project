@@ -8,6 +8,8 @@ var buffer = require('vinyl-buffer');
 var fancy_log = require('fancy-log');
 var qunit = require('gulp-qunit');
 var sass = require('gulp-sass');
+var prefix = require('gulp-autoprefixer');
+var minify = require('gulp-minify-css');
 
 sass.compiler = require('node-sass');
 
@@ -41,7 +43,9 @@ function bundle() {
 gulp.task('sass', function() {
 	return gulp.src('src/sass/**/*.scss')
 		.pipe(sourcemaps.init())
-		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(sass())
+		.pipe(prefix('last 2 version', 'safari 5', 'ie6', 'ie7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+		.pipe(minify())
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('styles/'));
 });
