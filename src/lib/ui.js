@@ -163,7 +163,11 @@ export function UI() {
 			case "^2":
 			case "^3":
 			case "^":
+			case "!":
 				this.expressionStr += op;
+				break;
+			case "sqrt(":
+				this.expressionStr = op + this.expressionStr;
 				break;
 			default:
 				if (this.displayingResult)
