@@ -6,7 +6,19 @@
 body{
     padding:0;
     margin:0;
-    background: $color_page_background;
+    background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+        linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+        linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+        linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+        linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+}
+
+#container {
+    max-width: 540px;
+    margin: 0 auto;
 }
 
 .output{
@@ -28,6 +40,18 @@ body{
     min-height: 100vh;
     grid-template-columns:repeat(5, 100px);
     grid-template-rows:minmax(120px,auto) repeat(7, 75px);
+
+    @include max_width (540px) {
+        grid-template-columns:repeat(5, 0.8fr);
+    }
+
+    @include max_width (330px) {
+        grid-template-columns:repeat(5, 0.5fr);
+    }
+
+    @include max_width (300px) {
+        grid-template-columns:repeat(5, 0.3fr);
+    }
 }
 
 .calculator-grid > button{
