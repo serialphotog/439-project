@@ -1,0 +1,20 @@
+// Typography config
+$font_stack: Gotham Rounded, sans-serif;
+$font_weight_global: normal;
+$font_size_calculator_output: 1.5rem;
+$font_size_calculator_button: 2rem;
+
+* {
+    font-family: $font_stack;
+    font-weight: $font_weight_global;
+}
+
+.output {
+    font-size: $font_size_calculator_output;
+    word-wrap:break-word;
+    word-break: break-all;
+}
+
+.calculator-grid > button {
+    font-size: $font_size_calculator_button;
+}
