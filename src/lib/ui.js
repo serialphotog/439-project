@@ -175,6 +175,10 @@ export function UI() {
 				this.expressionStr += op;
 				break;
 			case "sqrt(":
+			case "log(":
+			case "sin(":
+			case "cos(":
+			case "tan(":
 				this.expressionStr = op + this.expressionStr;
 				break;
 			default:
