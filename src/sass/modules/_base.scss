@@ -41,6 +41,10 @@ body{
     grid-template-columns:repeat(5, minmax(50px, 1fr));
     grid-template-rows: minmax(120px,auto) repeat(7, 75px);
 
+    @include max_width (570px) {
+        padding: 0 25px;
+    }
+
     @include max_width (330px) {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: minmax(120px,auto) 75px repeat(8, 75px);
