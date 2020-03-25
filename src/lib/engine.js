@@ -185,7 +185,7 @@ export function Calculator() {
 				res = "Syntax Error!";
 			else if (res == "Infinity")
 				res = "&#8734;";
-			return res;
+			return res.toString();
 		}
 	}
 
