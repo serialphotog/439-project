@@ -160,9 +160,17 @@ export function Calculator() {
 				} else if (postfix[i] == "sin(") {
 					stack.push(Math.sin(a * Math.PI / 180.0));
 				} else if (postfix[i] == "cos(") {
-					stack.push(Math.cos(a * Math.PI / 180.0));
+					// Fix for a bug in the way JS calculates the cosine of 90
+					if (a == 90)
+						stack.push(1);
+					else
+						stack.push(Math.cos(a * Math.PI / 180.0));
 				} else if (postfix[i] == "tan(") {
-					stack.push(Math.tan(a * Math.PI / 180.0));
+					// Deal with the edge case of tangent of 90
+					if (a == 90)
+						stack.push(Infinity);
+					else
+						stack.push(Math.tan(a * Math.PI / 180.0));
 				} else if (postfix[i] == "log(") {
 					stack.push(logBaseN(a, 10));
 				}
@@ -175,6 +183,8 @@ export function Calculator() {
 			var res = stack.pop();
 			if (res == "NaN" || isNaN(res))
 				res = "Syntax Error!";
+			else if (res == "Infinity")
+				res = "&#8734;";
 			return res;
 		}
 	}
