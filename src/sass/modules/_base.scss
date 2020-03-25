@@ -1,14 +1,31 @@
+// Global Styles
 *{
-box-sizing:border-box;
-font-family: Gotham Rounded, sans-serif;
-font-weight: normal;
+    box-sizing:border-box;
+    font-family: Gotham Rounded, sans-serif;
+    font-weight: normal;
 }
-
+    
 body{
     padding:0;
     margin:0;
     background: linear-gradient(to right, #00AAFF, #00FF6C)
 }
+
+.output{
+    grid-column:1 / -1;
+    background-color:rgba(0,0,0,.75);
+    display:flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap:break-word;
+    word-break: break-all;
+    color: white;
+    font-size: 1.5rem;
+}
+
+// The grid system
 .calculator-grid{
     display:grid;
     justify-content:center;
@@ -36,18 +53,4 @@ body{
 
 .span-three {
     grid-column: span 3;
-}
-
-.output{
-    grid-column:1 / -1;
-    background-color:rgba(0,0,0,.75);
-    display:flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 10px;
-    word-wrap:break-word;
-    word-break: break-all;
-    color: white;
-    font-size: 1.5rem;
 }

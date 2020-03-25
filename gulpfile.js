@@ -7,6 +7,9 @@ var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
 var fancy_log = require('fancy-log');
 var qunit = require('gulp-qunit');
+var sass = require('gulp-sass');
+
+sass.compiler = require('node-sass');
 
 // The watch task
 var watched = watchify(browserify({
@@ -34,6 +37,15 @@ function bundle() {
 			.pipe(gulp.dest('scripts/'));
 }
 
+// Compiles the SASS resources
+gulp.task('sass', function() {
+	return gulp.src('src/sass/**/*.scss')
+		.pipe(sourcemaps.init())
+		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('styles/'));
+});
+
 // The testing task
 gulp.task('test', function() {
 	return gulp.src('./test/engine.html')
@@ -43,6 +55,7 @@ gulp.task('test', function() {
 // Watches for changes to watched files
 gulp.task('watch', () => {
 	gulp.watch(['src/js/**/*.js'], bundle);
+	gulp.watch(['src/sass/**/*.scss'], gulp.parallel('sass'));
 });
 
 // Setup the tasks
