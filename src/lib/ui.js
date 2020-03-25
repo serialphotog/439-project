@@ -1,8 +1,15 @@
 import {Calculator} from './engine.js';
+import {History} from './history.js';
 
 export function UI() {
 	// The current expression string
 	this.expressionStr = "";
+
+	// The history storage object
+	this.history = new History();
+
+	// The current index into the history array
+	this.historyIndex = -1;
 
 	// Tracks if the display is set to a result
 	this.displayingResult = false;
@@ -141,6 +148,7 @@ export function UI() {
 		var calc = new Calculator();
 		var expr = calc.toPostfix(this.expressionStr);
 		var res = calc.calc(expr);
+		this.history.insert(res);
 		this.expressionStr = res;
 		this.displayingResult = true;
 		this.updateDisplay();
@@ -263,7 +271,35 @@ export function UI() {
 				else
 					this.solve();
 				break;
+			case "ArrowUp":
+			case "ArrowDown":
+				var hist = this.history.getHistory();
+
+				var item = "undefined";
+				if (e.code == "ArrowUp") {
+					item = hist[(this.historyIndex + 1) % hist.length];
+					if (item != null && item != "undefined")
+					{
+						this.historyIndex = (this.historyIndex + 1) % hist.length;
+						this.expressionStr = item;
+					} else {
+						// wrap the index
+						this.historyIndex = 0;
+					}
+				} else {
+					item = hist[(this.historyIndex - 1) % hist.length];
+					if (item != null && item != "undefined")
+					{
+						this.historyIndex = (this.historyIndex - 1) % hist.length;
+						this.expressionStr = item;
+					} else {
+						// wrap the index
+						this.historyIndex = hist.length;
+					}
+				}
+
+				this.updateDisplay();
+				break;
 		}	
 	}
-
 }
